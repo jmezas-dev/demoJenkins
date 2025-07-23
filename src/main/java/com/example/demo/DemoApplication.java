@@ -12,7 +12,7 @@ public class DemoApplication {
 
 	@RequestMapping("/hello")
 	public String HelloWorld() {
-		return "DO YOU KNOW WHERE THE FUCK YOU ARE?";
+		return "DO YOU KNOW WHERE THE FUCK YOU ARE";
 	}
 
 	public static void main(String[] args) {
