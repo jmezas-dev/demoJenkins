@@ -17,9 +17,9 @@ pipeline {
         stage("build") {
             steps{
                 echo "building the application v${NEW_VERSION}"
-            }
-            script {
-                dockerImage = docker.build registry + ":${NEW_VERSION}"
+                script {
+                    dockerImage = docker.build registry + ":${NEW_VERSION}"
+                }
             }
         }
         stage("test") {
