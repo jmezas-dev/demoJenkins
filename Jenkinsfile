@@ -1,6 +1,5 @@
 #!groovy
 pipeline {
-    agent docker
     environment {
         registry = 'jmezas/springservice'
         credential = ''
@@ -15,13 +14,6 @@ pipeline {
         booleanParam(name:'executeTests', defaultValue:true, description: 'Executes tests if true')
     }
     stages {
-        stage("build") {
-            agent any
-            steps {
-                echo "building the application v${NEW_VERSION}"
-                sh "docker build -t jmezas/springservice:${NEW_VERSION} ."
-            }
-        }
         stage("test") {
             agent any
             when {
@@ -39,6 +31,13 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+            }
+        }
+        stage("build") {
+            agent any
+            steps {
+                echo "building the application v${NEW_VERSION}"
+                sh "docker.build jmezas/springservice:${NEW_VERSION} ."
             }
         }
         stage("deploy") {
