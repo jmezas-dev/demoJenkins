@@ -1,7 +1,6 @@
 #!groovy
 pipeline {
-    agent {
-    }
+    agent docker
     environment {
         registry = 'jmezas/springservice'
         credential = ''
@@ -24,6 +23,7 @@ pipeline {
             }
         }
         stage("test") {
+            agent any
             when {
                 expression {
                     params.executeTests == true
@@ -42,6 +42,7 @@ pipeline {
             }
         }
         stage("deploy") {
+            agent docker
             steps{
                 echo "deploying the application ${params.VERSION}"
                 script {
