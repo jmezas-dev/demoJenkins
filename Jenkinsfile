@@ -23,9 +23,7 @@ pipeline {
             }
             steps {
                 echo "testing the application"
-                script {
-                    sh 'mvn test'
-                }
+                sh 'mvn test'
             }
             post {
                 always {
@@ -41,12 +39,10 @@ pipeline {
             }
         }
         stage("deploy") {
-            agent docker
-            steps{
+            agent any
+            steps {
                 echo "deploying the application ${params.VERSION}"
-                script {
-                    docker.build
-                }
+                sh "docker.build jmezas/springservice:${NEW_VERSION} ."
             }
         }
     }
