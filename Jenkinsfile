@@ -15,7 +15,7 @@ pipeline {
             steps{
                 echo "building the application v${NEW_VERSION}"
                 script {
-                    sh 'mvn compile'
+                    sh 'mvn -B -DskipTests clean package'
                 }
             }
         }
