@@ -3,7 +3,7 @@ pipeline {
     def app
     environment {
         registry = 'jmezas/springservice'
-        credential ''
+        credential = ''
         NEW_VERSION = '1.0.0'
     }
     tools {
