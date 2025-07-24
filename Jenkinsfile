@@ -1,6 +1,9 @@
 pipeline {
     agent any
+    def app
     environment {
+        registry = 'jmezas/springservice'
+        registry credential ''
         NEW_VERSION = '1.0.0'
     }
     tools {
@@ -14,10 +17,8 @@ pipeline {
         stage("build") {
             steps{
                 echo "building the application v${NEW_VERSION}"
-                script {
-                    sh 'mvn -B -DskipTests clean package'
-                }
             }
+            app = docker.build registry + ":${NEW_VERSION}"
         }
         stage("test") {
             when {
@@ -27,15 +28,22 @@ pipeline {
             }
             steps {
                 echo "testing the application"
-                script {
+                app.inside {
                     sh 'mvn test'
+                }
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
         stage("deploy") {
             steps{
                 echo "deploying the application ${params.VERSION}"
-
+                script {
+                    docker.build
+                }
             }
         }
     }
