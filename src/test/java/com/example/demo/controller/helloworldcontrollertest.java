@@ -23,6 +23,6 @@ class helloWorldControllerTests {
     @Test
     void HelloWorld() {
         log.info(helloWorldController.HelloWorld());
-        assertThat(helloWorldController.HelloWorld()).isEqualTo("does this works?");
+        assertThat(helloWorldController.HelloWorld()).isEqualTo("does this work");
     }
 }
