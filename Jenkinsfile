@@ -1,5 +1,6 @@
 #!groovy
 pipeline {
+    agent any
     environment {
         registry = 'jmezas/springservice'
         credential = ''
