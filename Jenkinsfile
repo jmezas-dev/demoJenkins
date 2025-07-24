@@ -1,5 +1,6 @@
+#!groovy
 pipeline {
-    agent any
+    agent none
     environment {
         registry = 'jmezas/springservice'
         credential = ''
@@ -15,11 +16,10 @@ pipeline {
     }
     stages {
         stage("build") {
-            steps{
+            agent any
+            steps {
                 echo "building the application v${NEW_VERSION}"
-                script {
-                    dockerImage = docker.build registry + ":${NEW_VERSION}"
-                }
+                sh "docker build -t jmezas/springservice:${NEW_VERSION} ."
             }
         }
         stage("test") {
