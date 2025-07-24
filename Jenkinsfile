@@ -14,6 +14,9 @@ pipeline {
         stage("build") {
             steps{
                 echo "building the application v${NEW_VERSION}"
+                script {
+                    sh 'mvn compile'
+                }
             }
         }
         stage("test") {
@@ -22,8 +25,11 @@ pipeline {
                     params.executeTests == true
                 }
             }
-            steps{
+            steps {
                 echo "testing the application"
+                script {
+                    sh 'mvn test;
+                }
             }
         }
         stage("deploy") {
