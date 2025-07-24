@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    def app
     environment {
         registry = 'jmezas/springservice'
         credential = ''
         NEW_VERSION = '1.0.0'
+        dockerImage = ''
     }
     tools {
         maven 'Maven'
@@ -18,7 +18,9 @@ pipeline {
             steps{
                 echo "building the application v${NEW_VERSION}"
             }
-            app = docker.build registry + ":${NEW_VERSION}"
+            script {
+                dockerImage = docker.build registry + ":${NEW_VERSION}"
+            }
         }
         stage("test") {
             when {
@@ -28,7 +30,7 @@ pipeline {
             }
             steps {
                 echo "testing the application"
-                app.inside {
+                script {
                     sh 'mvn test'
                 }
             }
