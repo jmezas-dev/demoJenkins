@@ -47,7 +47,11 @@ pipeline {
             agent any
             steps {
                 echo "deploying the application ${params.VERSION}"
-                sh "docker push ${REGISTRY}"
+                script {
+                    withCredentials(credentialsId:'docker',variable:'docker')
+                    sh "docker login -u jmezas -p ${docker}"
+                    sh "docker push ${REGISTRY}"
+                }
             }
         }
     }
