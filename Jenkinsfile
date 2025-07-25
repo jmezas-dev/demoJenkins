@@ -5,7 +5,6 @@ pipeline {
         registry = 'jmezas/springservice'
         credential = ''
         NEW_VERSION = '1.0.0'
-        dockerImage = ''
     }
     tools {
         maven 'Maven'
