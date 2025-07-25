@@ -1,5 +1,7 @@
 FROM eclipse-temurin:17-jdk AS builder
 
+USER root
+
 WORKDIR /app
 COPY --chmod=0755 mvnw mvnw
 COPY .mvn/ .mvn/
