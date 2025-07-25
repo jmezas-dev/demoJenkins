@@ -49,7 +49,7 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'docker', variable: 'CREDENTIALS')]) {
                         sh "docker login --username jmezas -p ${CREDENTIALS}"
-                        sh "docker tag ${REGISTRY} ${REGISTRY}:latest"
+                        sh "docker tag ${REGISTRY}:${NEW VERSION} ${REGISTRY}:latest"
                         sh "docker push ${REGISTRY}:latest"
                     }
                 }
