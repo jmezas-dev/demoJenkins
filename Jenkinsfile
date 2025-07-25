@@ -40,14 +40,14 @@ pipeline {
             agent any
             steps {
                 echo "building the application v${NEW_VERSION}"
-                sh "docker build -t jmezas/springservice:${NEW_VERSION}"
+                sh "docker build -t jmezas/springservice:${NEW_VERSION} ."
             }
         }
         stage("deploy") {
             agent any
             steps {
                 echo "deploying the application ${params.VERSION}"
-                sh "docker.build -t jmezas/springservice:${NEW_VERSION}"
+                sh "docker.build -t jmezas/springservice:${NEW_VERSION} ."
             }
         }
     }
