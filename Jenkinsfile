@@ -15,6 +15,11 @@ pipeline {
         booleanParam(name:'executeTests', defaultValue:true, description: 'Executes tests if true')
     }
     stages {
+        stage("Checkout Github"){
+            steps {
+                git credentialsId: 'gh-credential', url: 'https://github.com/jmezas-dev/demoJenkins.git'
+            }
+        }
         stage("test") {
             agent any
             when {
@@ -36,14 +41,14 @@ pipeline {
             agent any
             steps {
                 echo "building the application v${NEW_VERSION}"
-                sh "docker.build jmezas/springservice:${NEW_VERSION} ."
+                sh "docker.build jmezas/springservice:${NEW_VERSION}"
             }
         }
         stage("deploy") {
             agent any
             steps {
                 echo "deploying the application ${params.VERSION}"
-                sh "docker.build jmezas/springservice:${NEW_VERSION} ."
+                sh "docker.build jmezas/springservice:${NEW_VERSION}"
             }
         }
     }
