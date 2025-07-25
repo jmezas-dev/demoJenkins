@@ -3,7 +3,6 @@ pipeline {
     agent any
     environment {
         REGISTRY = 'jmezas/springservice'
-        credential = ''
         NEW_VERSION = '1.0.0'
     }
     tools {
@@ -48,7 +47,7 @@ pipeline {
             steps {
                 echo "deploying the application ${params.VERSION}"
                 script {
-                    withCredentials([credentialsId:'docker',variable:'docker']){
+                    withCredentials([string(credentialsId:'docker',variable:'docker')]){
                         sh "docker login -u jmezas -p ${docker}"
                         sh "docker push ${REGISTRY}"
                     }
