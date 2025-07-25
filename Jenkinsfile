@@ -47,7 +47,7 @@ pipeline {
             agent any
             steps {
                 echo "deploying the application ${params.VERSION}"
-                sh "docker pull ${REGISTRY}"
+                sh "docker push ${REGISTRY}"
             }
         }
     }
