@@ -2,7 +2,7 @@
 pipeline {
     agent any
     environment {
-        registry = 'jmezas/springservice'
+        REGISTRY = 'jmezas/springservice'
         credential = ''
         NEW_VERSION = '1.0.0'
     }
@@ -47,7 +47,7 @@ pipeline {
             agent any
             steps {
                 echo "deploying the application ${params.VERSION}"
-                sh "docker.build -t jmezas/springservice:${NEW_VERSION} ."
+                sh "docker.build -t ${REGISTRY}:${NEW_VERSION} ."
             }
         }
     }
