@@ -4,7 +4,6 @@ pipeline {
     environment {
         REGISTRY = 'jmezas/springservice'
         NEW_VERSION = '1.0.0'
-        CREDENTIALS=''
     }
     tools {
         maven 'Maven'
