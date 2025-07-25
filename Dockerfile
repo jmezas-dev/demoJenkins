@@ -3,10 +3,14 @@ FROM eclipse-temurin:17-jdk AS builder
 USER root
 
 WORKDIR /app
+
 COPY --chmod=0755 mvnw mvnw
+
 COPY .mvn/ .mvn/
+
 COPY . .
 
+RUN chmod +x ./mvnw
 RUN ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:17-jre-alpine
