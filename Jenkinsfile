@@ -48,7 +48,7 @@ pipeline {
             steps {
                 echo "deploying the application ${params.VERSION}"
                 script {
-                    withCredentials(credentialsId:'docker',variable:'docker')
+                    withCredentials([credentialsId:'docker',variable:'docker'])
                     sh "docker login -u jmezas -p ${docker}"
                     sh "docker push ${REGISTRY}"
                 }
