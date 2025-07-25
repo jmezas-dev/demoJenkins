@@ -48,7 +48,7 @@ pipeline {
             steps {
                 echo "deploying the application ${params.VERSION}"
                 script {
-                    withCredentials([string(credentialsId: 'docker', variable: 'docker')]) {
+                    withCredentials([string(credentialsId: 'docker', variable: 'CREDENTIALS')]) {
                         sh "docker login --username jmezas -p ${CREDENTIALS}"
                         sh "docker tag ${REGISTRY} ${REGISTRY}:latest"
                         sh "docker push ${REGISTRY}:latest"
